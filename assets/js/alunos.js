@@ -17,6 +17,26 @@ function feedbackFormValidacao() {
     } else {
         $('#nomeAluno').addClass('is-invalid');
     }
+    if ($('#primeiroBi').valid()) {
+        $('#primeiroBi').removeClass('is-invalid');
+    } else {
+        $('#primeiroBi').addClass('is-invalid');
+    }
+    if ($('#segundoBi').valid()) {
+        $('#segundoBi').removeClass('is-invalid');
+    } else {
+        $('#segundoBi').addClass('is-invalid');
+    }
+    if ($('#terceiroBi').valid()) {
+        $('#terceiroBi').removeClass('is-invalid');
+    } else {
+        $('#terceiroBi').addClass('is-invalid');
+    }
+    if ($('#quartoBi').valid()) {
+        $('#quartoBi').removeClass('is-invalid');
+    } else {
+        $('#quartoBi').addClass('is-invalid');
+    }
 }
 
 function adicionarAluno() {
@@ -36,6 +56,7 @@ function adicionarAluno() {
         adicionarLinhaTabela(aluno);
         
         aluno = {};
+        listaAlunos.push(aluno);
        
         $(":input").val("");
 
@@ -85,7 +106,9 @@ function deletarLinha(linha) {
 }
 
 function totalDeAlunos(valor)
-{
+{ var totalAlunos = document.querySelector("#numeroAlunos")
+    
+
 }
 
 
