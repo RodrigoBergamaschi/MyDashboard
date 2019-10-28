@@ -218,7 +218,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Starter Page</h1>
+                            <h1 class="m-0 text-dark">Orçamento escolar</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -237,8 +237,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card card-primary">
+
                                 <div class="card-header">
-                                    <h3 class="card-title">Cadastrar Aluno</h3>
+                                    <h3 class="card-title">Orçamento prévio de material escolar</h3>
 
                                     <div class="card-tools">
                                         <button class="btn btn-tool" type="button" data-card-widget="collapse"><i
@@ -247,7 +248,7 @@
                                     </div>
 
                                 </div>
-                                <!--#endregion-->
+
 
                                 <div clas="row">
                                     <div class="col-sm-12">
@@ -255,34 +256,162 @@
                                         <div class="card-body table-responsive p-0">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <div class="row">
+                                                    <!--#region form orçamento-->
+                                                    <form action="">
+                                                        <div class="row">
                                                             <div class="col-sm-12 col-md-4 col-lg-5">
-                                                                    <div class="form-group">
-                                                                        <label for="nomeAluno">Nome do aluno</label>
-                                                                        <input type="text" name="" class="form-control" id="nomeAluno"required>
+                                                                <div class="form-group">
+                                                                    <label for="">Nome do aluno</label>
+                                                                    <input id="nomeAluno" type="text" name=""
+                                                                        class="form-control" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-4 col-lg-3">
+                                                                <label for="">Posso gastar até:</label>
+                                                                <div class="input-group mb-3">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><i
+                                                                                class="fas fa-dollar-sign"></i></span>
+                                                                    </div>
+                                                                    <input id="totalDisponivel" type="number"
+                                                                        class="form-control" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12 col-lg-3">
+                                                                <div class="form-group ">
+
+                                                                    <button id="botaoIniciarCompra" type="button"
+                                                                        class="btn btn-primary mt-31"
+                                                                        onclick="iniciarCompra()" disabled>
+                                                                        <i class="fas fa-plus"></i> Começe a comprar
+                                                                    </button>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                                                <div class="form-group">
+                                                                    <label for="">Material escolar</label>
+
+                                                                    <select id="listamateriais" class="custom-select"
+                                                                        id="nomeMaterial">
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-4 col-lg-2">
+                                                                <label for="">Quantidade</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input id="qteMaterial" type="number"
+                                                                        class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-4 col-lg-2">
+                                                                <label for="">Preço unitário</label>
+                                                                <div class="input-group mb-3">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"
+                                                                            id="basic-addon1"><i
+                                                                                class="fas fa-dollar-sign"></i></span>
+                                                                    </div>
+                                                                    <input type="number" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12 col-lg-3">
+                                                                <div class="form-group ">
+
+                                                                    <button type="button" class="btn btn-primary mt-31"
+                                                                        onclick="adicionarItem()">
+                                                                        <i class="fas fa-plus"></i> Adicionar
+                                                                    </button>
+
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </form>
+                                                    <!--endregion form orçamento-->
+
+                                                    <!--#region <p>-->
+                                                    <div class="row pt-20">
+                                                        <div class="col-sm-12 col-md-12- col-lg-12">
+                                                            <p id="p.aluno">
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                    <!--#endregion <p>-->
+
+                                                    <!--#region table-->
+                                                    <div clas="row">
+                                                        <div class="col-sm-12">
+
+                                                            <div class="card-body table-responsive p-0">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+
+
+
+                                                                    </div>
+
+                                                                    <div class="card-body table-responsive p-0">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12 col-md-2 col-lg-8">
+
+                                                                                <table id="listagemAlunos"
+                                                                                    class="table table-hover">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Material</th>
+                                                                                            <th>Quantidade</th>
+                                                                                            <th>Valor unitário</th>
+                                                                                            <th>Total</th>
+
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-12 col-md-4 col-lg-3">
-                                                                    <label for="">Posso gastar até:</label>
-                                                                    <div class="input-group mb-3">
-                                                                            <div class="input-group-prepend">
-                                                                              <span class="input-group-text" id="basic-addon1"><i class="fas fa-dollar-sign"></i></span>
-                                                                            </div>
-                                                                            <input type="number" class="form-control" >
-                                                                          </div>
-                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <!--#endregion-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                                     </div>
-
-
-
                                                 </div>
+
+
+
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
 
                     </div>
@@ -290,11 +419,14 @@
                 </div>
 
             </div>
+
         </div>
-        <div class="row"></div>
-    </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content -->
+
+    </div>
+    <!--#endregion-->
+    </div>
+
     </div>
     <!-- #endregion-->
 
@@ -334,7 +466,7 @@
     <!--Tastr-->
     <script src="../assets/js/toastr.min.js"></script>
     <!--Js alunos-->
-    <script src="../assets/js/alunos.js"></script>
+    <script src="../assets/js/orcamento.escolar.js"></script>
 
     <!-- #endregion-->
 

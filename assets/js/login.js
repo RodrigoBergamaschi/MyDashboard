@@ -18,7 +18,7 @@ function autenticar()
     {
         
         toastr.success('Usuário encontrado');
-        setTimeout(function(){location="../pages/dashboard.html"} , 2000);
+        setTimeout(function(){location="file:///C:/Users/rodri/OneDrive/Documentos/GitHub/MyDashboard/pages/dashboard.html"} , 2000);
        
        
     }
