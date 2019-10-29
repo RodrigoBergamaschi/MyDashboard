@@ -90,8 +90,29 @@ function validarInicio() {
 
     if ($('#nomeAluno').valid() && $('#totalDisponivel').valid()) {
         $("#botaoForm").attr('disabled', false);
+        console.log($('#totalDisponivel').val());
+        
+        exibirParagragrafoAluno();
+        validaSaldo();
     } else {
         $("#botaoForm").attr('disabled', true);
+    }
+}
+function exibirParagragrafoAluno()
+{
+    var p = document.getElementById('p.aluno')
+        p.innerHTML = '<i class="fas fa-list"></i>' +
+        ' Lista de materiais do aluno: ' +$('#nomeAluno').val();
+}
+
+function validaSaldo()
+{
+    if($('#totalDisponivel').valid())
+    {
+        var saldo = document.getElementById('saldo');
+        saldo.innerText ='R$ ' + $('#totalDisponivel').val();
+       
+        console.log(saldo)
     }
 }
 //#endregion
@@ -116,7 +137,7 @@ function adicionaItemNaLista() {
         listaCompra.push(itemCompra);
         for (var i = 0; i < listaCompra.length; i++) {
             console.log(listaCompra[i])
-            adicionaItemNaTabela(listaCompra)
+            adicionaItemNaTabela(itemCompra)
         }
     }
 
@@ -134,14 +155,16 @@ function adicionaItemNaLista() {
 }
 //#endregion
 
-function adicionaItemNaTabela(listaCompra) {
+function adicionaItemNaTabela(itemCompra) {
     for (var i = 0; i < listaCompra.length; i++) {
         var tabela = document.querySelector("table");
         var tr = tabela.insertRow();
-        tr.innerHTML = "<td>" + itemCompra.nome + "</td>" +
-            "<td>" + itemCompra.quantidadeItem + "</td>" +
-            "<td>" + itemCompra.precoUnitario + "</td>" +
-            "<td>" + itemCompra.valorTotal + "</td>";
-       
+        tr.innerHTML = "<td>" + itemCompra[i].nome + "</td>" +
+            "<td>" + itemCompra[i].quantidadeItem + "</td>" +
+            "<td>" + itemCompra[i].precoUnitario + "</td>" +
+            "<td>" + itemCompra[i].valorTotal + "</td>";
+      
    }
 }
+
+
