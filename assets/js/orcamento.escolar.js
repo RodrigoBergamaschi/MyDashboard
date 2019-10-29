@@ -1,131 +1,147 @@
 var materiasEscolares = [];
 var listaCompra = [];
-var itemCompra;
+var itemCompra = {};
 var aluno = {};
 //#region itens
 var materiailEscolar =
 {
     nome: "Caneta",
-    preco: 2
+
 };
 materiasEscolares.push(materiailEscolar);
 
 materiailEscolar =
     {
         nome: "Lápis",
-        preco: 2
+
     };
 materiasEscolares.push(materiailEscolar);
 
 materiailEscolar =
     {
         nome: "Caderno",
-        preco: 10
+
     };
 materiasEscolares.push(materiailEscolar);
 
 materiailEscolar =
     {
         nome: "Mochila",
-        preco: 50
+
     };
 materiasEscolares.push(materiailEscolar);
 
 materiailEscolar =
     {
         nome: "Borracha",
-        preco: 3
+
     };
 materiasEscolares.push(materiailEscolar);
 
 materiailEscolar =
     {
         nome: "Cola",
-        preco: 7
+
     };
 materiasEscolares.push(materiailEscolar);
 
 materiailEscolar =
     {
         nome: "Calculadora",
-        preco: 20
+
     };
 materiasEscolares.push(materiailEscolar);
 
 materiailEscolar =
     {
         nome: "Corretivo",
-        preco: 2
+
     };
 materiasEscolares.push(materiailEscolar);
 
 materiailEscolar =
     {
         nome: "Régua",
-        preco: 6
+
     };
 materiasEscolares.push(materiailEscolar);
 
 materiailEscolar =
     {
         nome: "Compasso",
-        preco: 6
+
     };
 materiasEscolares.push(materiailEscolar);
 //#endregion
 
 //#region preencimento lita de itens
 for (var i = 0; i < materiasEscolares.length; i++) {
-    console.log(i, materiasEscolares[i]); // i é o índice, matriz[i] é o valor
+    var lista = document.getElementById("material");
+    lista.innerHTML +=
+        '<option selected>' + materiasEscolares[i].nome + '</option>';
+
 }
 
-var lista = document.getElementById("listamateriais");
-console.log(lista);
-lista.innerHTML =
-    '<option selected>' + materiasEscolares[0].nome + '</option>' +
-    '<option selected>' + materiasEscolares[1].nome + '</option>' +
-    '<option selected>' + materiasEscolares[2].nome + '</option>' +
-    '<option selected>' + materiasEscolares[3].nome + '</option>' +
-    '<option selected>' + materiasEscolares[4].nome + '</option>' +
-    '<option selected>' + materiasEscolares[5].nome + '</option>' +
-    '<option selected>' + materiasEscolares[6].nome + '</option>' +
-    '<option selected>' + materiasEscolares[7].nome + '</option>' +
-    '<option selected>' + materiasEscolares[8].nome + '</option>' +
-    '<option selected>' + materiasEscolares[9].nome + '</option>'
-//#endregion
-
-//#region preenchimento paragrafo com nome do anulo
 
 //#endregion
 
-function validarForm() {
-    return $('#nomeAluno').valid() &&
-        $("#totalDisponivel").valid();
+//#region validação para botao
+function validarInicio() {
+
+    if ($('#nomeAluno').valid() && $('#totalDisponivel').valid()) {
+        $("#botaoForm").attr('disabled', false);
+    } else {
+        $("#botaoForm").attr('disabled', true);
+    }
+}
+//#endregion
+
+//#region adicionando item na listaItem
+function validaItem() {
+    return $('#material').valid() &&
+        $("#qteMaterial").valid() &&
+        $('#precoUnitario').valid();
+
+}
+
+
+function adicionaItemNaLista() {
+    var valido = validaItem();
+    if (valido) {
+        itemCompra.nome = $('#material').val();
+        itemCompra.quantidadeItem = parseInt($('#qteMaterial').val());
+        itemCompra.precoUnitario = parseInt($('#precoUnitario').val());
+        itemCompra.valorTotal = calculaValorTotal(itemCompra.quantidadeItem, itemCompra.precoUnitario)
+
+        listaCompra.push(itemCompra);
+        for (var i = 0; i < listaCompra.length; i++) {
+            console.log(listaCompra[i])
+            adicionaItemNaTabela(listaCompra)
+        }
+    }
+
+    else {
+        console.log("ta dando ruim aqui");
+
+    };
+
+    function calculaValorTotal(quantidadeItem, precoUnitario) {
+
+        return quantidadeItem * precoUnitario;
+    }
+
+
+}
+//#endregion
+
+function adicionaItemNaTabela(listaCompra) {
+    for (var i = 0; i < listaCompra.length; i++) {
+        var tabela = document.querySelector("table");
+        var tr = tabela.insertRow();
+        tr.innerHTML = "<td>" + itemCompra.nome + "</td>" +
+            "<td>" + itemCompra.quantidadeItem + "</td>" +
+            "<td>" + itemCompra.precoUnitario + "</td>" +
+            "<td>" + itemCompra.valorTotal + "</td>";
        
-}
-
-function feedbackFormValidacao() {
-
-    if ($('#nomeAluno').valid() && $('#totalDisponivel').valid())
-    {
-      $('#botaoIniciarCompra').prop('disable', false)
-    }
-   
-}
-
-
-
-function iniciarCompra() {
-    var valido = validarForm();
-    if(valido)
-    {
-    aluno.nome = $("#nomeAluno").val();
-    aluno.total = parseInt($('#totalDisponivel').val());
-    console.log(aluno);
-    var paragrafoaluno = document.getElementById("p.aluno");
-    paragrafoaluno.innerHTML = '<i class="fas fa-list"></i> Lista de materiais do aluno: ' + $('#nomeAluno').val();
-
-    
-    }
-    
+   }
 }
