@@ -90,6 +90,15 @@ function validarInicio() {
 
     if ($('#nomeAluno').valid() && $('#totalDisponivel').valid()) {
         $("#botaoForm").attr('disabled', false);
+        
+        var p = document.getElementById('p.aluno');
+        p.innerHTML = '<i class="fas fa-list"></i>' + 
+                      ' Lista de materias do aluno: ' + $('#nomeAluno').val();
+        console.log(p);
+
+        var saldo = document.getElementById('saldo')
+        saldo.innerHTML = 'R$ ' + parseFloat($('#totalDisponivel').val());
+
     } else {
         $("#botaoForm").attr('disabled', true);
     }
@@ -138,7 +147,7 @@ function adicionaItemNaTabela(listaCompra) {
     for (var i = 0; i < listaCompra.length; i++) {
         var tabela = document.querySelector("table");
         var tr = tabela.insertRow();
-        tr.innerHTML = "<td>" + itemCompra.nome + "</td>" +
+        tr.innerHTML += "<td>" + itemCompra.nome + "</td>" +
             "<td>" + itemCompra.quantidadeItem + "</td>" +
             "<td>" + itemCompra.precoUnitario + "</td>" +
             "<td>" + itemCompra.valorTotal + "</td>";
