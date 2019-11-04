@@ -90,7 +90,7 @@ function validarInicio() {
 
     if ($('#nomeAluno').valid() && $('#totalDisponivel').valid()) {
         $("#botaoForm").attr('disabled', false);
-        
+
         var p = document.getElementById('p.aluno');
         p.innerHTML = '<i class="fas fa-list"></i>' + 
                       ' Lista de materias do aluno: ' + $('#nomeAluno').val();
@@ -99,8 +99,30 @@ function validarInicio() {
         var saldo = document.getElementById('saldo')
         saldo.innerHTML = 'R$ ' + parseFloat($('#totalDisponivel').val());
 
+        console.log($('#totalDisponivel').val());
+        
+        exibirParagragrafoAluno();
+        validaSaldo();
+
     } else {
         $("#botaoForm").attr('disabled', true);
+    }
+}
+function exibirParagragrafoAluno()
+{
+    var p = document.getElementById('p.aluno')
+        p.innerHTML = '<i class="fas fa-list"></i>' +
+        ' Lista de materiais do aluno: ' +$('#nomeAluno').val();
+}
+
+function validaSaldo()
+{
+    if($('#totalDisponivel').valid())
+    {
+        var saldo = document.getElementById('saldo');
+        saldo.innerText ='R$ ' + $('#totalDisponivel').val();
+       
+        console.log(saldo)
     }
 }
 //#endregion
@@ -122,12 +144,11 @@ function adicionaItemNaLista() {
         itemCompra.precoUnitario = parseInt($('#precoUnitario').val());
         itemCompra.valorTotal = calculaValorTotal(itemCompra.quantidadeItem, itemCompra.precoUnitario)
 
-        listaCompra.push(itemCompra);
-        for (var i = 0; i < listaCompra.length; i++) {
+      
             console.log(listaCompra[i])
-            adicionaItemNaTabela(listaCompra)
+            adicionaItemNaTabela(itemCompra)
         }
-    }
+    
 
     else {
         console.log("ta dando ruim aqui");
@@ -143,14 +164,20 @@ function adicionaItemNaLista() {
 }
 //#endregion
 
-function adicionaItemNaTabela(listaCompra) {
-    for (var i = 0; i < listaCompra.length; i++) {
+function adicionaItemNaTabela(itemCompra) {
+    
         var tabela = document.querySelector("table");
         var tr = tabela.insertRow();
         tr.innerHTML += "<td>" + itemCompra.nome + "</td>" +
             "<td>" + itemCompra.quantidadeItem + "</td>" +
             "<td>" + itemCompra.precoUnitario + "</td>" +
-            "<td>" + itemCompra.valorTotal + "</td>";
-       
-   }
+            "<td>" + itemCompra.valorTotal + "</td>" +
+            "<td><button type='button' class='btn btn-danger btn-xs' onclick='deletarLinha(this)'><i class='fas fa-user-times' ></i></button></td>";
+        toastr.success('Aluno incluido com sucesso!');
+}
+
+function deletarLinha(linha) {
+    var i = linha.parentNode.parentNode.rowIndex;
+    document.querySelector('table').deleteRow(i);
+    toastr.info('Aluno excluído com sucesso!');
 }
